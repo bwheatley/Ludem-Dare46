@@ -4,15 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class UiManager : MonoBehaviour {
 
-    public static GameManager instance;
-    public Vector2 Map_BL = new Vector2(-21, -12);
-    public Vector2 Map_TL = new Vector2(-21, 10);
-    public Vector2 Map_BR = new Vector2(21, -12);
-    public Vector2 Map_TR = new Vector2(21, 10);
-
-
+    public static UiManager instance;
+    public GameObject fishLeftCount;
 
     void Awake () {
         //We only ever want 1 game manager
@@ -25,6 +20,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +28,22 @@ public class GameManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-        // UiManager.instance.RemoveFish();
+    void Update()
+    {
 
     }
+
+
+    /// <summary>
+    /// Remove a fish from the counter
+    /// </summary>
+    public void RemoveFish() {
+        var   txt   = fishLeftCount.GetComponent<TMP_Text>().text;
+        Int32 count = Int32.Parse(txt);
+
+        count                                       = count - 1;
+        fishLeftCount.GetComponent<TMP_Text>().text = count.ToString();
+        Debug.Log(string.Format("Count is {0}", count));
+    }
+
 }
