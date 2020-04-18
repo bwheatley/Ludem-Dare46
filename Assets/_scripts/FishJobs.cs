@@ -28,12 +28,12 @@ public class FishJobs : MonoBehaviour
         fishList = new List<FishJob>();
         for (int i = 0; i < 1000; i++) {
             Transform fishTransform = Instantiate(pfFish[Random.Range(0,pfFish.Count)],
-                new Vector3(Random.Range(-8f, 8f), Random.Range(-5f, 5f)),
+                new Vector3(Random.Range(GameManager.instance.Map_BL.x, GameManager.instance.Map_BR.x), Random.Range(GameManager.instance.Map_TL.y, GameManager.instance.Map_BL.y)),
                 quaternion.identity);
             fishList.Add(
                 new FishJob {
                     transform = fishTransform,
-                    moveY     = Random.Range(1f, 2f)
+                    moveY     = Random.Range(.5f, 5f)
                 }
             );
 
@@ -108,8 +108,17 @@ public class FishJobs : MonoBehaviour
             }
 
             //Left Edge
+            if (transform.position.x <= mapLeft) {
+                //Send it right
+                moveY[index] = +math.abs(moveY[index]);
+            }
+
 
             //Right Edge
+            if (transform.position.x >= mapRight) {
+                //Send it left
+                moveY[index] = +math.abs(moveY[index]);
+            }
 
 
 
