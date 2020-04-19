@@ -45,8 +45,14 @@ public class FishJobs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int _difficulty = 0;
         //Determine enemy count from difficulty
-        var _difficulty =  Difficulty.instance.GetDifficulty();
+        if (Difficulty.instance != null) {
+            _difficulty = Difficulty.instance.GetDifficulty();
+        }
+
+        var _EnemySpeedBase = 2f;
+        var _EnemySpeedMax  = 5f;
 
         switch (_difficulty) {
             case 0: //Easy * .25 = 5
@@ -54,14 +60,22 @@ public class FishJobs : MonoBehaviour
                 break;
             case 1: //Normal .5 = 10
                 enemyCount = Mathf.RoundToInt(GameManager.instance.GetDifficultyMupliplier(2) * (float)enemyCount);
+                _EnemySpeedBase = _EnemySpeedBase * 2f;
+                _EnemySpeedMax = _EnemySpeedMax * 2f;
                 break;
             case 2: //Hard * 1 = 20
                 enemyCount = Mathf.RoundToInt(GameManager.instance.GetDifficultyMupliplier(1) * (float)enemyCount);
+                _EnemySpeedBase = _EnemySpeedBase * 2.5f;
+                _EnemySpeedMax  = _EnemySpeedMax  * 2.5f;
                 break;
             case 3: //Impossible * 2 = 40
                 enemyCount = Mathf.RoundToInt(GameManager.instance.GetDifficultyMupliplier(0) * (float)enemyCount);
+                _EnemySpeedBase = _EnemySpeedBase * 3f;
+                _EnemySpeedMax  = _EnemySpeedMax  * 3f;
                 break;
         }
+
+
 
 
 
@@ -108,8 +122,8 @@ public class FishJobs : MonoBehaviour
                 enemiesList.Add(
                     new FishJob {
                         transform = enemiesTransform,     //There location
-                        moveY     = Random.Range(2f, 5f), //Their speed in the Y direction
-                        moveX     = Random.Range(2f, 5f),  //Their speed in the X direction
+                        moveY     = Random.Range(_EnemySpeedBase, _EnemySpeedMax), //Their speed in the Y direction
+                        moveX     = Random.Range(_EnemySpeedBase, _EnemySpeedMax),  //Their speed in the X direction
                         currentFlipTime = 0f
                     }
                 );
@@ -119,8 +133,8 @@ public class FishJobs : MonoBehaviour
                 enemiesList.Add(
                     new FishJob {
                         transform = enemiesTransform,     //There location
-                        moveY     = Random.Range(-2f, -5f), //Their speed in the Y direction
-                        moveX     = Random.Range(-2f, -5f),  //Their speed in the X direction
+                        moveY     = Random.Range(_EnemySpeedBase, -_EnemySpeedMax), //Their speed in the Y direction
+                        moveX     = Random.Range(_EnemySpeedBase, -_EnemySpeedMax),  //Their speed in the X direction
                         currentFlipTime = 0f
                     }
                 );

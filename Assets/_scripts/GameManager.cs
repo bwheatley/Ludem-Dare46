@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour {
 
@@ -19,7 +20,35 @@ public class GameManager : MonoBehaviour {
     public difficulty currentDifficulty;
     public List<GameObject> dontDestroyObjects;
 
+    //Sound Shit
+    public AudioClip[] shark_hit;
+    public AudioClip[] squid_hit;
+    public AudioClip[] fish_eaten;
+    public AudioClip[] shark_eat;
+    public AudioClip[] squid_eat;
+    public AudioClip[] victory;
+    public AudioClip[] dead;
 
+    public AudioSource masterEffectSource;
+    public AudioSource masterSharkEffectSource;
+    public AudioSource masterSquidEffectSource;
+    public AudioSource masterSoundsSource;
+    public AudioSource masterMusicSource;
+    //End Sound Shit
+
+    public GameResult gameResult;
+
+    public string GameOverTxt_Failure = "Game over, you lose!";
+    public string GameOverTxt_Victory = "Game over, you are victorious";
+
+
+
+    public enum GameResult {
+        InProgress,
+        Victory,
+        Failure
+
+    }
 
     public enum difficulty {
         Easy,
@@ -45,8 +74,13 @@ public class GameManager : MonoBehaviour {
     void Start() {
         DontDestroyObjects();
 
-        //Set the difficulty
-        var _difficulty =  Difficulty.instance.GetDifficulty();
+
+
+        int _difficulty = 0;
+        //Determine enemy count from difficulty
+        if (Difficulty.instance != null) {
+            _difficulty = Difficulty.instance.GetDifficulty();
+        }
 
         switch (_difficulty) {
         case 0:        //Easy
@@ -74,8 +108,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void DontDestroyObjects() {
-        for (int i = 0; i < GameManager.instance.dontDestroyObjects.Count; i++) {
-            var _myItem = GameManager.instance.dontDestroyObjects[i];
+        for (int i = 0; i < dontDestroyObjects.Count; i++) {
+            var _myItem = dontDestroyObjects[i];
             DontDestroyOnLoad(_myItem);
         }
     }
@@ -83,12 +117,76 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void PlayClip(string soundToPlay, string group = "Sounds") {
+        AudioSource _myAudio = masterEffectSource.GetComponent<AudioSource>();
+        if (group != "Sounds") {
+            _myAudio = masterSoundsSource.GetComponent<AudioSource>();
+        }
+
+        switch (group) {
+        case "shark_eat":
+            _myAudio = masterSharkEffectSource.GetComponent<AudioSource>();
+            break;
+        case "squid_eat":
+            _myAudio = masterSquidEffectSource.GetComponent<AudioSource>();
+            break;
+
+        }
+
+
+        //LowerCasing it since it bite m in the ass once
+        if (!_myAudio.isPlaying) {
+            switch (soundToPlay.ToLower()) {
+                case "shark_hit":
+                    _myAudio.clip = shark_hit[Random.Range(0, shark_hit.Length)];
+                    break;
+                case "squid_hit":
+                    _myAudio.clip = squid_hit[Random.Range(0, squid_hit.Length)];
+                    break;
+                case "fish_eaten":
+                    _myAudio.clip = fish_eaten[Random.Range(0, fish_eaten.Length)];
+                    break;
+                case "shark_eat":
+                    _myAudio.clip = shark_eat[Random.Range(0, shark_eat.Length)];
+                    break;
+                case "squid_eat":
+                    _myAudio.clip = squid_eat[Random.Range(0, squid_eat.Length)];
+                    break;
+                case "victory":
+                    _myAudio.clip = victory[Random.Range(0, victory.Length)];
+                    break;
+                case "dead":
+                    _myAudio.clip = dead[Random.Range(0, dead.Length)];
+                    break;
+                // case "menu_dropdown":
+                //     _myAudio.clip = menu_dropdown;
+                //     break;
+                // case "ui_submit":
+                //     _myAudio.clip = ui_submit;
+                //     break;
+                // case "victory":
+                //     //Util.WriteDebugLog("Play Victory");
+                //     _myAudio.clip = VictoryAudioClip;
+                //     break;
+            }
+
+            //Play the selected clip
+            //Util.WriteDebugLog(string.Format("Clip Played {0} Audio Manager {1} Clip {2}", soundToPlay, _myAudio.name, _myAudio.clip.name), GameManager.LogLevel_Debug);
+            _myAudio.Play();
+        }
+    }
+
+
     /// <summary>
     /// Add time to the clock
     /// </summary>
     public void AddTime() {
-        //Set the difficulty
-        var _difficulty =  Difficulty.instance.GetDifficulty();
+
+        int _difficulty = 0;
+        //Determine enemy count from difficulty
+        if (Difficulty.instance != null) {
+            _difficulty = Difficulty.instance.GetDifficulty();
+        }
 
         switch (_difficulty) {
             case 0: //Easy
@@ -101,7 +199,7 @@ public class GameManager : MonoBehaviour {
                 TimeLeft          = difficultyMultipler[2] + TimeLeft;
                 break;
             case 3: //Impossible
-                TimeLeft          = difficultyMultipler[3] + TimeLeft;
+                TimeLeft          = difficultyMultipler[2] + TimeLeft;
                 break;
         }
 
@@ -126,9 +224,35 @@ public class GameManager : MonoBehaviour {
         if (TimeLeft <= 0f || UiManager.instance.GetFishCount() == 0 || UiManager.instance.GetEnemyCount() == 0) {
             TimeLeft = 0f;
 
-            //Game over
-            SceneManager.LoadScene(2);
+
+
+            //Did we win?
+            if (gameResult == GameResult.InProgress) {
+                if (UiManager.instance.GetEnemyCount() <= 0) {
+                    gameResult = GameResult.Victory;
+                }
+                else {
+                    gameResult = GameResult.Failure;
+                }
+
+                //Game over
+                SceneManager.LoadScene(2);
+            }
+
         }
     }
+
+    public void GameOver_Victory() {
+        string soundToPlay = "victory";
+        GameManager.instance.PlayClip(soundToPlay);
+
+    }
+
+    public void GameOver_Failure() {
+        string soundToPlay = "dead";
+        GameManager.instance.PlayClip(soundToPlay);
+
+    }
+
 
 }

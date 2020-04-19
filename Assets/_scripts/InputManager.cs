@@ -31,6 +31,16 @@ public class InputManager : MonoBehaviour {
             // Debug.Log(string.Format("We hit something {0}", hit.collider.gameObject));
             // //Is it a sharky
             // if (_go.GetComponent<Shark>()) {
+
+            string soundToPlay = "";
+            //What type of enemy
+            if (_go.transform.parent.GetComponent<Shark>().type == Shark.EnemyType.Shark) {
+                soundToPlay = "shark_hit";
+            }
+            else if (_go.transform.parent.GetComponent<Shark>().type == Shark.EnemyType.Squid) {
+                soundToPlay = "squid_hit";
+            }
+            GameManager.instance.PlayClip(soundToPlay);
             FishJobs.instance.DeleteEnemy(_go.transform.parent.gameObject);
 
             //Add time baby!

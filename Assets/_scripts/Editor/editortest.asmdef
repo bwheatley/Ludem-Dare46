@@ -3,6 +3,8 @@
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [
+        "LinuxStandalone64",
+        "macOSStandalone",
         "WindowsStandalone32",
         "WindowsStandalone64"
     ],

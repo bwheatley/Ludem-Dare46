@@ -3,8 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shark : MonoBehaviour
-{
+public class Shark : MonoBehaviour {
+    public EnemyType type;
+
+    public enum EnemyType {
+        Shark,
+        Squid
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +27,17 @@ public class Shark : MonoBehaviour
 
         //Sharks can't eat sharks
         if (!other.gameObject.GetComponent<Shark>()) {
-            if (other.gameObject.activeSelf) {
-                FishJobs.instance.DeleteFish(other.gameObject);
+            string soundToPlay = "";
+            //What type of enemy
+            if (type == Shark.EnemyType.Shark) {
+                soundToPlay = "shark_eat";
             }
+            else if (type == Shark.EnemyType.Squid) {
+                soundToPlay = "squid_eat";
+            }
+            GameManager.instance.PlayClip(soundToPlay, soundToPlay);
+
+            FishJobs.instance.DeleteFish(other.gameObject);
         }
     }
 

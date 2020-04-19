@@ -10,7 +10,7 @@ Material:
   m_Name: Water-Shader-Lit
   m_Shader: {fileID: -6465566751694194690, guid: cb73318c3d02de94f9d7d77bcbf92625,
     type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,12 +20,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_97F297E1:
+        m_Texture: {fileID: 2800000, guid: 299913ef40d3cef4cbbf4aa412fe396f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_F9896F77:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AlphaTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 299913ef40d3cef4cbbf4aa412fe396f, type: 3}
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -36,11 +44,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_CEBBAAB2_Out_0:
+        m_Texture: {fileID: 2800000, guid: 299913ef40d3cef4cbbf4aa412fe396f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_7043DF3A: 0.05
+    - Vector1_458040BD: 1
+    - Vector1_64E9698A: 1
+    - Vector1_7043DF3A: 0.101
+    - Vector1_C8921753: 0.359
     - _EnableExternalAlpha: 0
+    - _Fade: 0.249
     m_Colors:
-    - Color_A50A4A94: {r: 0.28676468, g: 0.6458418, b: 1, a: 1}
+    - Color_A50A4A94: {r: 0.28676465, g: 0.64584184, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
