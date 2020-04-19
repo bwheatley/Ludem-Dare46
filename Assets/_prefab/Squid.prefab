@@ -79,15 +79,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1020907763, guid: fcbe6c7d01e40734cb5a9a15e960dfc8, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4809bef3940f1f246bc8330074208755, type: 2}
     - target: {fileID: 542186617147158211, guid: fcbe6c7d01e40734cb5a9a15e960dfc8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.179
+      value: -1.7909853
       objectReference: {fileID: 0}
     - target: {fileID: 542186617147158211, guid: fcbe6c7d01e40734cb5a9a15e960dfc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.877
+      value: -2.0321422
       objectReference: {fileID: 0}
     - target: {fileID: 542186617147158211, guid: fcbe6c7d01e40734cb5a9a15e960dfc8,
         type: 3}

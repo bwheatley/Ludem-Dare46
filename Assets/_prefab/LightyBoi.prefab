@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7494378815837793747}
   - component: {fileID: 1538983048140239858}
   - component: {fileID: 8554361477955714747}
+  - component: {fileID: 6972426793009519081}
   m_Layer: 0
   m_Name: LightyBoi
   m_TagString: Untagged
@@ -127,3 +128,22 @@ MonoBehaviour:
   - {x: 2.1861296, y: 1.2833791, z: 0}
   - {x: 0.0025529861, y: 1.2607293, z: -0.000000059604645}
   - {x: -1.1863894, y: 0.9700273, z: 0}
+--- !u!95 &6972426793009519081
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7021621471604671311}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb026a6ae42a4aa4b971aa1c31a6e8c1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

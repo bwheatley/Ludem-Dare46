@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6114708489533043898}
   - component: {fileID: 7073218468099078956}
   - component: {fileID: 8574872700719925424}
+  - component: {fileID: 1020907763}
   m_Layer: 0
   m_Name: Shark1
   m_TagString: Untagged
@@ -145,6 +146,25 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!95 &1020907763
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542186617147158238}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 23f313b9c86bb614d829f70a39dc081d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3011346012674951261
 GameObject:
   m_ObjectHideFlags: 0
